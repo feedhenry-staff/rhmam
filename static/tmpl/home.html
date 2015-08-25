@@ -1,0 +1,11 @@
+<div ng-controller="home">
+  <h1 class="pageTitle">Please choose an item</h1>
+  <ul>
+      <li ng-repeat="com in coms" class="comItem pull-left padding20" ui-sref="com(com)">
+        <div><img ng-src="com/{{com.id}}/icon.png" width="100"/></div>
+        <div style="text-align:center" class="textLarge3 bold">
+          {{com.name}}
+        </div>
+      </li>
+  </ul>
+</div>

@@ -1,0 +1,18 @@
+.hidden{
+  display:none;
+}
+
+.textLarge3{
+  font-size:1.5em;
+}
+.textSmall3{
+  font-size:0.75em;
+}
+
+.bold{
+  font-weight:bold;
+}
+
+.padding20{
+  padding:20px;
+}

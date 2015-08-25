@@ -1,0 +1,22 @@
+
+#header{
+  padding:20px;
+  background:#ccc;
+}
+#header .title{
+  font-size:22px;
+}
+#content{
+  position:absolute;
+  top:62px;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:15px;
+  overflow: auto;
+}
+.pageTitle{
+  font-size:2em;
+  color:#0F1F4C;
+  margin:10px;
+}
