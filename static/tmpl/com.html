@@ -1,6 +1,10 @@
-<div ng-controller="com" ui-view>
-    <h1 class="pageTitle">{{comName}} <small>{{pageTitle}}</small></h1>
+<div ng-controller="com">
+  <ng-include src="'tmpl/comNav.html'"></ng-include>
+  <h1 class="pageTitle">{{page.title}}</h1>
+  <div ui-view>
     <div class="padding20">
-        <ng-include src="getConfigUrl()"></ng-include>
+      <ng-include src="getConfigUrl()"></ng-include>
+      <button class='btn btn-primary'>Save</button>
     </div>
+  </div>
 </div>

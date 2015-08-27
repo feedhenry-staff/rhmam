@@ -1,0 +1,10 @@
+<div ng-controller="log">
+  <div>
+    <button class="btn btn-primary">Request Log</button>
+  </div>
+  <table class="table table-striped table-hover">
+    <tr ng-repeat="l in logs">
+      <td>{{l.data}}</td>
+    </tr>
+  </table>
+</div>

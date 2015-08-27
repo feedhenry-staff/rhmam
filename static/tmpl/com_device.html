@@ -1,0 +1,12 @@
+<div class="padding20" ng-controller="com.device">
+  <h1 class="sectionTitle">Config</h1>
+  <div>Config updated: {{com.config.lastUpdate}}</div>
+  <div>
+      <ng-include src="getConfigUrl()"></ng-include>
+      <button class='btn btn-primary'>Save</button>
+  </div>
+  <hr/>
+  <div>
+    <ng-include src="getUrl('device')"></ng-include>
+  </div>
+</div>

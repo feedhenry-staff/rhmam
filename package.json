@@ -1,8 +1,12 @@
 {
-  "name": "fhmam",
-  "description": "RedHat mobile administration management framework",
+  "name": "rhmam",
+  "description": "RedHat mobile application management framework",
   "version": "0.1.0",
   "dependencies": {
-    "express": "^4.13.3"
+    "async": "^1.4.2",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.3",
+    "winston": "^1.0.1"
   }
 }
