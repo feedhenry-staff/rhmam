@@ -3,7 +3,8 @@ var env=require("../env");
 var models={
   "Component":require("./Component"),
   "Device":require("./Device"),
-  "Task":require("./Task")
+  "Task":require("./Task"),
+  "Log":require("../com/log/models/Log")
 }
 var inited=false;
 function init(cb){

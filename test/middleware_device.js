@@ -30,6 +30,9 @@ describe("Device Register middleware",function(){
           uuid:"12345"
         },function(err,d){
           assert(!err);
+          assert(req.device);
+          assert(req.device.uuid==="12345");
+          assert(req.device.name==="some device");
           assert(d.device.name==="some device");
           assert(d.uuid);
           assert(d.registeredDate);

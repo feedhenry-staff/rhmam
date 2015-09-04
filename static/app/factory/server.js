@@ -1,24 +1,4 @@
 app.factory("server", function(mock, $q,prog) {
-  var exports = {
-    listComs:listComs,
-    loadCom:loadCom,
-    listDevices:listDevices,
-    call:_call
-  };
-  function listDevices(){
-    return _call({url:"/api/device"});
-  }
-  function listComs(){
-    return _call({
-      url:"/api/com"
-    });
-  }
-  function loadCom(id){
-    return _call({
-      url:"/api/com/"+id
-    })
-  }
-
   function _call(param) {
     prog.start();
     var defer = $q.defer();
@@ -46,5 +26,5 @@ app.factory("server", function(mock, $q,prog) {
 
     return defer.promise;
   }
-  return exports;
+  return _call;
 });

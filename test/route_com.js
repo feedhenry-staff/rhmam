@@ -80,15 +80,20 @@ describe("Com route", function() {
       }
       fn.getComDeviceCfg(req, helper.res(function(r) {
         assert(r.test === "config");
-        models.Device.update({uuid:"testUuid"},{
-          config:{
-            "hello":{
-              test:"configDevice"
+        models.Device.update({
+          uuid: "testUuid"
+        }, {
+          config: {
+            "hello": {
+              test: "configDevice"
             }
           }
-        },function(e){
+        }, function(e) {
           assert(!e);
-          fn.getComDeviceCfg(req, helper.res(function(r) {
+          req.device = {
+            uuid: "testUuid"
+          }
+          fn.mam_getConfig(req, helper.res(function(r) {
             assert(r.test === "configDevice");
             done();
           }));
@@ -96,5 +101,27 @@ describe("Com route", function() {
       }))
     })
 
+  });
+  it("should run command for a component", function(done) {
+    var Log = models.Log;
+    var l = new Log({
+      deviceUuid: "testuuid",
+      text: "hello log"
+    });
+    l.save(function() {
+      fn.runCmd({
+        params: {
+          "comId": "log",
+          "cmd": "logs"
+        },
+        body:{
+          "deviceUuid":"testuuid"
+        }
+      }, helper.res(function(d) {
+        assert(d.length>0);
+        assert(d[0].text==="hello log");
+        done();
+      }));
+    })
   });
 });

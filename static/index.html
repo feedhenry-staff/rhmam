@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="fhmam">
 <head>
+  <link rel="stylesheet" href="./css/reset.css"/>
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="./bower_components/angular-bootstrap/ui-bootstrap-csp.css"/>
   <link rel="stylesheet" href="./bower_components/nprogress/nprogress.css"/>
 
-  <link rel="stylesheet" href="./css/reset.css"/>
   <link rel="stylesheet" href="./css/helper.css"/>
   <link rel="stylesheet" href="./css/default.css"/>
   <link rel="stylesheet" href="./css/component.css"/>
@@ -25,21 +25,30 @@
   <!-- Controllers -->
   <script type="text/javascript" src="./app/controller/home.js"></script>
   <script type="text/javascript" src="./app/controller/com.js"></script>
+  <script type="text/javascript" src="./app/controller/task.js"></script>
 
   <!-- Factories -->
   <script type="text/javascript" src="./app/factory/prog.js"></script>
   <script type="text/javascript" src="./app/factory/server.js"></script>
   <script type="text/javascript" src="./app/factory/mock.js"></script>
+  <script type="text/javascript" src="./app/factory/Component.js"></script>
+  <script type="text/javascript" src="./app/factory/task.js"></script>
 
   <!-- Components -->
   <script type="text/javascript" src="./com/log/controller.js"></script>
+
+  <script type="text/javascript" src="./com/device/factory.js"></script>
 </head>
 <body>
   <div id="header">
     <div class="title">Mobile Application Management</div>
   </div>
-  <div id="content" ui-view>
-
+  <div id="content">
+    <div id="taskPan" class="padding10">
+      <ng-include src="'tmpl/taskList.html'"/>
+    </div>
+    <div id="contentPan" ui-view>
+    </div>
   </div>
 </body>
 </html>

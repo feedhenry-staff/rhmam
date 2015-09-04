@@ -1,13 +1,73 @@
 module.exports = {
   listTask: listTask,
   newTask: newTask,
-  deleteTask: deleteTask
+  deleteTask: deleteTask,
+  mam_getTasks: mam_getTasks,
+  mam_replyTask:mam_replyTask
 };
 
 var Task = require("../../models").Task;
+var async = require("async");
+var log = require("../../log");
+
+function mam_replyTask(req,res,next){
+  var uuid=req.device.uuid;
+  var taskId=req.params.taskId;
+  var msg=req.body.msg;
+  var success=req.body.success?true:false;
+  Task.findOneAndUpdate({
+    deviceUuid:uuid,
+    _id:taskId
+  },{
+    completeDate:new Date(),
+    status:success?"completed":"error",
+    replyMsg:msg
+  },function(err){
+    if (err){
+      next(err);
+    }else{
+      res.end();
+    }
+  });
+}
+function mam_getTasks(req, res, next) {
+  var uuid = req.device.uuid;
+  async.waterfall([
+    function(scb) {
+      Task.find({
+        deviceUuid: uuid,
+        status: "new"
+      }, "_id task", function(err, r) {
+        scb(err, r);
+      });
+    },
+    function(r, scb) {
+      Task.update({
+        deviceUuid: uuid,
+        status: "new"
+      }, {
+        status: "dispatched",
+        dispatchDate:new Date()
+      }, function(e) {
+        scb(e, r);
+      });
+    }
+  ], function(err, list) {
+    if (err) {
+      next(err);
+    } else {
+      res.json(list);
+    }
+  });
+}
+
 
 function listTask(req, res, next) {
-  Task.find({}, function(err, r) {
+  var args = {};
+  if (req.query && req.query.uuid) {
+    args.deviceUuid = req.query.uuid;
+  }
+  Task.find(args).sort("-createDate").exec(function(err, r) {
     if (err) {
       next(err);
     } else {
@@ -37,10 +97,10 @@ function deleteTask(req, res, next) {
     } else {
       if (t) {
         t.status = "deleted";
-        t.save(function(err){
-          if (err){
+        t.save(function(err) {
+          if (err) {
             next(err);
-          }else{
+          } else {
             res.end();
           }
         })

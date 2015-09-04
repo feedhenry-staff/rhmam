@@ -1,10 +1,58 @@
 <div ng-controller="log">
   <div>
-    <button class="btn btn-primary">Request Log</button>
+    <label>
+      <input type="checkbox" ng-model="poll" ng-model-options="{getterSetter:true}" />Poll </label>
+    <div class="row">
+      <div class="col-md-6">
+          <div><b>Start Date: </b></div>
+        <p class="input-group">
+          <input type="text"
+          disabled="disabled"
+           class="form-control"
+           datepicker-popup="{{format}}"
+           ng-model="stdt"
+           is-open="status.stopened"
+           min-date="2015-01-01"
+           max-date="'2020-06-22'"
+           close-text="Close"
+           ng-change="refresh()"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="status.stopened=true"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <div><b>End Date: </b></div>
+        <p class="input-group">
+          <input type="text"
+          disabled="disabled"
+           class="form-control"
+           datepicker-popup="{{format}}"
+           ng-model="endt"
+           is-open="status.enopened"
+           min-date="2015-01-01"
+           max-date="'2020-06-22'"
+           close-text="Close"
+           ng-change="refresh()"
+          />
+           <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="status.enopened=true"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
   </div>
   <table class="table table-striped table-hover">
     <tr ng-repeat="l in logs">
-      <td>{{l.data}}</td>
+      <td>
+        <div><b><i>{{toDate(l.timestamp)}}</i></b> {{l.text}}</div>
+        <div><b>Meta:</b> {{l.meta}}</div>
+      </td>
     </tr>
   </table>
+  <div ng-if="logs.length ===0">
+    No Logs Found for the date range.
+  </div>
 </div>

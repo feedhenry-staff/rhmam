@@ -1,7 +1,7 @@
-app.controller("home",function($scope,server,$state){
+app.controller("home",function($scope,Component,$state){
   $scope.coms=[];
   function init(){
-    server.listComs().then(function(d){
+    Component.list().then(function(d){
       $scope.coms=d;
     });
   }

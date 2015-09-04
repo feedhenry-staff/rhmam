@@ -1,16 +1,26 @@
 <div class="padding20">
+  <button ng-click="refreshDeviceList()" class="btn btn-primary">Refresh List</button>
   <table class="table table-striped table-hover">
     <tr>
       <th>Device UUID</th>
+      <th>Model</th>
+      <th>Platform</th>
+      <th>Version</th>
       <th>Last Online</th>
     </tr>
     <tr
     ng-repeat="d in devices"
     class="{{Date.now()-d.lastOnline<1000*60?'success':''}}"
-    ui-sref="com.device({deviceId:d._id})"
+    ui-sref="com.device({deviceId:d.uuid})"
     >
-      <td>{{d.uuid}}</td>
-      <td>{{d.lastOnline}}</td>
+      <td>
+        {{d.uuid}}
+        <div ng-if="d.device.identifier">({{d.device.identifier}})</div>
+      </td>
+      <td>{{d.device.model}}</td>
+      <td>{{d.device.platform}}</td>
+      <td>{{d.device.version}}</td>
+      <td>{{toReadableTime(d.lastOnline)}}</td>
     </tr>
   </table>
 </div>

@@ -1,20 +1,23 @@
 <div class="form-group">
-  <label>Client Log Enabled </label>
+  <label>Record Log</label>
   <div>
     <label class="radio-inline">
-      <input type="radio" name="log-enable" ng-model="com.config.enabled" value="1"> On
+      <input type="radio" name="log-enable" ng-model="conf.record" value="1"> On
     </label>
     <label class="radio-inline">
-      <input type="radio" name="log-enable" ng-model="com.config.enabled" value="0"> Off
+      <input type="radio" name="log-enable" ng-model="conf.record" value="0"> Off
     </label>
   </div>
 </div>
 <div class="form-group">
-  <label>Log Level</label>
-  <select class="form-control" ng-model="com.config.loglevel">
-    <option value="debug">Debug</option>
-    <option value="info">Info</option>
-    <option value="warn">Warn</option>
-    <option value="error">Error</option>
-  </select>
+  <label>Upload Interval (Seconds. 0 to disable uploading)</label>
+  <input class="form-control" ng-model="conf.uploadInterval"/>
+</div>
+<div class="form-group">
+  <label>Log Rotation (Days. 0 to disable log rotation)</label>
+  <input class="form-control" ng-model="conf.logRotation"/>
+</div>
+<div class="form-group">
+  <label>Encryption</label>
+  <input class="form-control" ng-model="conf.encrypt"/>
 </div>

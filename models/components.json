@@ -1,0 +1,42 @@
+[{
+  "id": "log",
+  "name": "Client Log",
+  "config": {
+    "record": true,
+    "uploadInterval": 60,
+    "logRotation": 5,
+    "encrypt": false
+  },
+  "ui": {
+    "config": true,
+    "device": true
+  },
+  "tasks":[
+    {
+      "name":"Request Log",
+      "task":"requestLog"
+    },
+    {
+      "name":"Clean All Logs",
+      "task":"cleanLogs"
+    }
+  ],
+  "props":{
+    "iconCls":"glyphicon glyphicon-list-alt"
+  }
+}, {
+  "id": "device",
+  "name": "Device",
+  "config": {
+    "liveInterval": 0,
+    "debugUrl":"",
+    "debugEnabled":false
+  },
+  "ui": {
+    "config": true,
+    "device": true
+  },
+  "props":{
+    "iconCls":"glyphicon glyphicon-phone"
+  }
+}]

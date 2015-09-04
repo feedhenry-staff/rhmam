@@ -1,12 +1,26 @@
 <div class="padding20" ng-controller="com.device">
-  <h1 class="sectionTitle">Config</h1>
-  <div>Config updated: {{com.config.lastUpdate}}</div>
-  <div>
-      <ng-include src="getConfigUrl()"></ng-include>
-      <button class='btn btn-primary'>Save</button>
-  </div>
-  <hr/>
-  <div>
-    <ng-include src="getUrl('device')"></ng-include>
-  </div>
+  <tabset>
+    <tab heading="Content">
+      <ng-include src="getUrl('device')"></ng-include>
+    </tab>
+    <tab heading="Client Tasks" class="row">
+      <button
+      class="btn btn-primary col-md-3"
+      style="margin:8px"
+      ng-repeat="t in com.props.tasks"
+      ng-click="addTask(t.task)"
+      >
+        {{t.name}}
+      </button>
+      <h3 ng-if="!com.props.tasks || com.props.tasks.length ===0">
+        No tasks defined for this component.
+      </h3>
+    </tab>
+    <tab heading="Device Config">
+      <div>
+        <ng-include src="getConfigUrl()"></ng-include>
+        <button class='btn btn-primary' ng-click="saveConfig()">Save</button>
+      </div>
+    </tab>
+  </tabset>
 </div>

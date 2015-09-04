@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label>Live Interval (0 to disable)</label>
+  <input class="form-control" ng-model="conf.liveInterval"/>
+</div>
+<div class="form-group">
+  <label>Debug Enabled</label>
+  <div>
+    <label class="radio-inline">
+      <input type="radio" name="debug-enable" ng-model="conf.debugEnabled" value="1"> On
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="debug-enable" ng-model="conf.debugEnabled" value="0"> Off
+    </label>
+  </div>
+</div>
+<div class="form-group">
+  <label>Remote Weinre URL</label>
+  <input class="form-control" ng-model="conf.debugUrl"/>
+</div>

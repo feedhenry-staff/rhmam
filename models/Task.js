@@ -7,10 +7,7 @@ var Task=new Schema({
   "dispatchDate":Date,
   "completeDate":Date,
   "task":String,
-  "reply":{
-    "isSuccess":Boolean,
-    "data":Schema.Types.Mixed
-  }
+  "replyMsg":String
 });
 
 var Model=mongoose.model("Task",Task);

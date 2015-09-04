@@ -1,0 +1,16 @@
+<div ng-controller="task">
+  <div class="clearfix">
+    <h3 class="pull-left">Tasks</h3> <button class="pull-right btn btn-primary" ng-click="refresh()">Refresh</button>
+  </div>
+  <ul>
+    <li class="taskItem" ng-repeat="t in tasks">
+      <div><b>Device uuid:</b> <div>{{t.deviceUuid}}</div></div>
+      <div><b>Status: </b>{{t.status}}</div>
+      <div><b>Task:</b> {{t.task}}</div>
+      <div ng-if="t.createDate">Create Date: <div>{{t.createDate.toString()}}</div></div>
+      <div ng-if="t.dispatchDate">Dispatch Date: <div>{{t.dispatchDate.toString()}}</div></div>
+      <div ng-if="t.completeDate">Create Date: <div>{{t.completeDate.toString()}}</div></div>
+      <div ng-if="t.completeDate && t.replyMsg"><button class="btn btn-xs btn-primary" ng-click="showMsg(t.replyMsg)">Show Reply Message</button></div>
+    </li>
+  </ul>
+</div>

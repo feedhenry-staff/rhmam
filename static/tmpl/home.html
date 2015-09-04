@@ -1,10 +1,13 @@
 <div ng-controller="home" class="padding20">
   <h1 class="pageTitle">Please choose an item</h1>
   <ul>
-      <li ng-repeat="com in coms" class="comItem pull-left padding20" ui-sref="com(com)">
-        <div><img ng-src="com/{{com.id}}/icon.png" width="100"/></div>
+      <li ng-repeat="com in coms" style="text-align:center" class="comItem pull-left padding20" ui-sref="com(com.props)">
+        <div>
+          <img ng-if="!com.props.props.iconCls" ng-src="com/{{com.props.id}}/icon.png" width="48"/>
+          <span ng-if="com.props.props.iconCls" class="{{com.props.props.iconCls}}" style="font-size:2em"/>
+        </div>
         <div style="text-align:center" class="textLarge3 bold">
-          {{com.name}}
+          {{com.props.name}}
         </div>
       </li>
   </ul>

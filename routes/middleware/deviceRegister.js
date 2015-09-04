@@ -1,7 +1,7 @@
 var log = require("../../log");
-var async=require("async");
-var Device=require("../../models").Device;
-var q=async.queue(onDevice,1);
+var async = require("async");
+var Device = require("../../models").Device;
+var q = async.queue(onDevice, 1);
 /*
 {
   "fh":{},  //from $fh.getFHParams
@@ -16,45 +16,53 @@ module.exports = function(req, res, next) {
       if (d.device) {
         var uuid = d.device.uuid;
         if (uuid) {
-          log.silly("Received device with uuid:",uuid);
+          req.device = d.device;
+          log.silly("Received device with uuid:", uuid);
           q.push(d);
+          next();
+          return;
         }
       }
+      next(new Error("MAM - device uuid cannot found in device info."));
     } catch (e) {
       log.error("Failed to parse device info:", deviceInfo);
       log.error(e);
+      next(e);
     }
+  } else {
+    next(new Error("X-MAM-DEVICE header is not setup for MAM calls."));
   }
-  //run next asyncly
-  next();
 }
 
-function onDevice(task,cb){
-  log.silly("device task",task);
-  var uuid=task.device.uuid;
-  Device.findOne({uuid:uuid},function(err,s){
-    if (err){
-      log.error("Failed to retrieve device from db. uuid: ",uuid);
+function onDevice(task, cb) {
+  log.silly("device task", task);
+  var uuid = task.device.uuid;
+  Device.findOne({
+    uuid: uuid
+  }, function(err, s) {
+    if (err) {
+      log.error("Failed to retrieve device from db. uuid: ", uuid);
       cb();
-    }else{
-      if (s){
-        log.silly("Device found for uuid: %s, start to merge",uuid);
-      }else{
-        log.silly("Device not found. Register new device for: ",uuid);
-        s=new Device();
+    } else {
+      if (s) {
+        log.silly("Device found for uuid: %s, start to merge", uuid);
+      } else {
+        log.silly("Device not found. Register new device for: ", uuid);
+        s = new Device();
       }
-      mapDevice(task,s);
+      mapDevice(task, s);
       log.silly("Store device");
       s.save(cb);
     }
   });
 }
-function mapDevice(income,d){
-  if (d.isNew){
-    d.uuid=income.device.uuid;
-    d.registeredDate=new Date();
+
+function mapDevice(income, d) {
+  if (d.isNew) {
+    d.uuid = income.device.uuid;
+    d.registeredDate = new Date();
   }
-  d.lastOnline=new Date();
-  d.device=income.device;
-  d.fhParams=income.fh;
+  d.lastOnline = new Date();
+  d.device = income.device;
+  d.fhParams = income.fh;
 }
