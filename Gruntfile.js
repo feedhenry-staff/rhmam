@@ -24,8 +24,8 @@ module.exports = function(grunt) {
         script: 'application.js',
         options: {
           args: [],
-          ignore: ['public/**'],
-          ext: 'js,html',
+          ignore: ['static/**'],
+          ext: 'js',
           nodeArgs: [],
           delayTime: 1,
           env: {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       }
     },
     concurrent: {
-      serve: ['nodemon', 'watch'],
+      serve: ['nodemon:dev', 'watch'],
       debug: ['node-inspector', 'shell:debug', 'open:debug'],
       options: {
         logConcurrentOutput: true

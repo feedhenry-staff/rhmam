@@ -1,0 +1,29 @@
+<div ng-controller="mam-storage">
+  <h3>File System</h3>
+  <div>
+    <div class="pull-right" style="padding:10px">
+    Choose a directory:
+    <select ng-model="dir" ng-options="dir as dir.directory for dir in directories " style="min-width:100px"> </select>
+    <button class="btn btn-primary" ng-click="refresh()">Refresh</button>
+  </div>
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Directory</th>
+        <th>File</th>
+        <th>Full Path</th>
+        <th>Action</th>
+      </tr>
+      <tr ng-repeat="d in dir.content">
+        <td>{{d.name}}</td>
+        <td>{{d.isDirectory}}</td>
+        <td>{{d.isFile}}</td>
+        <td>{{d.fullPath}}</td>
+        <td>
+          <span class="glyphicon glyphicon-refresh" title="Sync" style="cursor:pointer" ng-click="syncFile(d)"/>
+          <span ng-if="d.isFile" class="glyphicon glyphicon-download-alt" title="Download" style="cursor:pointer" ng-click="downloadFile(d)"/>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

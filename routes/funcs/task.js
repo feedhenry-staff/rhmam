@@ -3,13 +3,24 @@ module.exports = {
   newTask: newTask,
   deleteTask: deleteTask,
   mam_getTasks: mam_getTasks,
-  mam_replyTask:mam_replyTask
+  mam_replyTask:mam_replyTask,
+  mam_getTaskParams:mam_getTaskParams
 };
 
 var Task = require("../../models").Task;
 var async = require("async");
 var log = require("../../log");
 
+function mam_getTaskParams(req,res,next){
+  var id=req.params.taskId;
+  Task.findById(id,function(err,doc){
+    if (err){
+      next(err);
+    }else{
+      res.json(doc.params);
+    }
+  });
+}
 function mam_replyTask(req,res,next){
   var uuid=req.device.uuid;
   var taskId=req.params.taskId;

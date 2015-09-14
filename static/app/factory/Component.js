@@ -9,10 +9,11 @@ app.factory("Component", function(server,task, $q) {
       this.props = p;
     }
   }
-  Com.prototype.addTask=function(name,deviceId){
+  Com.prototype.addTask=function(name,deviceId,param){
     var obj={
       deviceUuid:deviceId,
-      task:this.comId+"."+name
+      task:this.comId+"."+name,
+      params:param
     }
     return task.add(obj);
   }

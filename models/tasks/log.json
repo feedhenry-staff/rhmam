@@ -1,0 +1,9 @@
+[{
+  "name": "Request Log",
+  "task": "requestLog",
+  "description":"Request logs from device. This task will only upload the logs that has not being uploaded."
+}, {
+  "name": "Clean All Logs",
+  "task": "cleanLogs",
+  "description":"Clean all stored logs on device."
+}]

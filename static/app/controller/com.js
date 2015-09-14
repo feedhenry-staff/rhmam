@@ -75,10 +75,14 @@ app.controller("com.device",function($scope,Component,$stateParams){
   $scope.conf={};
   $scope.saveConfig=saveConfig;
   $scope.addTask=addTask;
+  $scope.getDeviceId=getDeviceId;
   init();
 
-  function addTask(task){
-      $scope.com.addTask(task,deviceId);
+  function getDeviceId(){
+    return deviceId;
+  }
+  function addTask(task,params){
+      $scope.com.addTask(task,deviceId,params);
   }
   function saveConfig(){
     $scope.com.updateConfigForDevice(deviceId,$scope.conf)

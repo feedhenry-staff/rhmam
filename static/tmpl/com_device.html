@@ -4,17 +4,10 @@
       <ng-include src="getUrl('device')"></ng-include>
     </tab>
     <tab heading="Client Tasks" class="row">
-      <button
-      class="btn btn-primary col-md-3"
-      style="margin:8px"
-      ng-repeat="t in com.props.tasks"
-      ng-click="addTask(t.task)"
-      >
-        {{t.name}}
-      </button>
       <h3 ng-if="!com.props.tasks || com.props.tasks.length ===0">
         No tasks defined for this component.
       </h3>
+      <ng-include ng-if="com.props.tasks && com.props.tasks.length >0" src="'tmpl/clientTask.html'"/>
     </tab>
     <tab heading="Device Config">
       <div>

@@ -1,0 +1,25 @@
+<h3>Tasks</h3>
+<table class="table table-stripe">
+  <tr>
+    <th style="width:150px;">Name</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-repeat="t in com.props.tasks">
+    <td>
+      <b>{{t.name}}</b>
+    </td>
+    <td>
+      {{t.description}}
+      <div style="padding:10px;">
+        <div ng-if="t.tmpl">
+          <h4>Params:</h4>
+          <ng-include src="getUrl(t.tmpl)" ></ng-include>
+        </div>
+        <div ng-if="!t.tmpl">
+          <button class="btn btn-primary btn-sm pull-right" ng-click="addTask(t.task)">
+            Run Task
+          </button>
+        </div>
+    </td>
+  </tr>
+</table>

@@ -15,21 +15,39 @@ var Component = new Schema({
   props: Schema.Types.Mixed
 });
 Component.statics.install = function(cb) {
-  var components = require("./components.json");
+  var components = require("./components.js");
   log.info("Start to install components. Length: ", components.length);
   async.series([
+    function(scb) {
+      Model.find({}, function(err, r) {
+        if (err) {
+          scb(err);
+        } else {
+          log.info("Use saved configuration.");
+          r.forEach(function(item) {
+            components.forEach(function(newItem) {
+              if (newItem.id === item.id) {
+                for (var key in item.config) {
+                  if (typeof newItem.config[key] !="undefined"){
+                    newItem.config[key] = item.config[key];
+                  }
+                }
+              }
+            });
+          });
+          scb();
+        }
+      });
+    },
     function(scb) {
       Model.remove({}, scb);
     },
     function(scb) {
       Model.create(components, scb);
+
     }
   ], cb);
 }
 var Model = mongoose.model("Component", Component);
-var components = [];
-require("./components.json").forEach(function(c) {
-  components.push(new Model(c));
-});
 
 module.exports = Model;

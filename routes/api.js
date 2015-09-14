@@ -16,3 +16,6 @@ router.get("/device",require("./funcs/device").listDevice);
 router.post("/task",urlEncode,require("./funcs/task").newTask);
 router.get("/task",require("./funcs/task").listTask);
 router.delete("/task/:taskId",require("./funcs/task").deleteTask);
+
+
+router.get("/download",require("../com/storage/funcs").downloadFile);

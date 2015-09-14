@@ -36,7 +36,8 @@ var Device = new Schema({
   config: {
     type: Schema.Types.Mixed,
     default: {}
-  }
+  },
+  customFields: Schema.Types.Mixed
 });
 
 var Model = mongoose.model("Device", Device);

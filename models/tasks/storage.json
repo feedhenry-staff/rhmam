@@ -1,0 +1,8 @@
+[
+  {
+    "name":"Sync File Entry",
+    "description":"Sync a file entry with its full path. The target file URL can be a file or directory. If it is a file, the file will be uploaded and can be downloaded from its directory. If it is a directory, the directory entry can be listed.",
+    "task":"syncFile",
+    "tmpl":"tmpl/syncFile"
+  }
+]
