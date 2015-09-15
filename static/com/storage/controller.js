@@ -10,7 +10,9 @@ app.controller("mam-storage",function($scope){
   }
   refresh();
   function refresh(){
-    $scope.com.run("listDirectories")
+    $scope.com.run("listDirectories",{
+      deviceUuid:$scope.getDeviceId()
+    })
     .then(function(l){
       $scope.directories=l;
     })

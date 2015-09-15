@@ -14,7 +14,7 @@ function getCustomFields(data, cb) {
         cb(err);
       } else {
         if (res) {
-          console.log(typeof res.customFields);
+          // console.log(typeof res.customFields);
           cb(null, res.customFields);
         } else {
           cb(null, []);
